@@ -1,0 +1,33 @@
+{
+  "name": "emoji-embed-search",
+  "version": "1.0.0",
+  "description": "Emoji search library using embeddings",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "generate-embeddings": "ts-node scripts/generateEmbeddings.ts"
+  },
+  "keywords": [
+    "emoji",
+    "search",
+    "embeddings",
+    "nlp"
+  ],
+  "author": "cjnghn",
+  "license": "MIT",
+  "dependencies": {
+    "@langchain/openai": "^0.2.6",
+    "emojilib": "^3.0.12",
+    "langchain": "^0.2.13",
+    "unicode-emoji-json": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.11.6",
+    "@types/node": "^22.1.0",
+    "cli-progress": "^3.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
