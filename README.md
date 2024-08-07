@@ -2,12 +2,12 @@
 
 ## TODO
 
-• Enhance multi-language support
-• Consider separating embedding files from the main library
-• Trigger this separation when the user initializes the search service
-• Develop a lightweight embedding model for local use only
-• Create a simple demo webpage
-• Determine methods to measure user search satisfaction
+- [ ] Enhance multi-language support
+- [ ] Consider separating embedding files from the main library
+- [ ] Trigger this separation when the user initializes the search service
+- [ ] Develop a lightweight embedding model for local use only
+- [ ] Create a simple demo webpage
+- [ ] Determine methods to measure user search satisfaction
 
 ## Example
 
