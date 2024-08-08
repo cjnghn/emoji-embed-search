@@ -1,5 +1,5 @@
 import { EmojiDataProviderConfig, EmojiDataProvider } from "../types";
-import { JsonEmojiDataProvider } from "./JsonEmojiDataProvider";
+import { JsonEmojiDataProvider } from "./json-emoji-data-provider";
 
 export class EmojiDataProviderFactory {
   static create(config: EmojiDataProviderConfig): EmojiDataProvider {

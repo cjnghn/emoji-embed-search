@@ -1,5 +1,5 @@
 import { EmbeddingProviderConfig, EmbeddingProvider } from "../types";
-import { OpenAIEmbeddingProvider } from "./OpenAIEmbeddingProvider";
+import { OpenAIEmbeddingProvider } from "./openai-embedding-provider";
 
 export class EmbeddingProviderFactory {
   static create(config: EmbeddingProviderConfig): EmbeddingProvider {

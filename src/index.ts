@@ -1,4 +1,4 @@
-export { EmojiSearchService } from "./EmojiSearchService";
-export { OpenAIEmbeddingProvider } from "./providers/OpenAIEmbeddingProvider";
-export { JsonEmojiDataProvider } from "./providers/JsonEmojiDataProvider";
+export { EmojiSearchService } from "./emoji-search-service";
+export { OpenAIEmbeddingProvider } from "./providers/openai-embedding-provider";
+export { JsonEmojiDataProvider } from "./providers/json-emoji-data-provider";
 export * from "./types";

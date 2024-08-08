@@ -1,5 +1,5 @@
-import { EmbeddingProviderFactory } from "./providers/EmbdeeingProviderFactory";
-import { EmojiDataProviderFactory } from "./providers/EmojiDataProviderFactory";
+import { EmbeddingProviderFactory } from "./providers/embedding-provider-factory";
+import { EmojiDataProviderFactory } from "./providers/emoji-data-provider-factory";
 import { EmbeddingProvider, EmojiDataProvider } from "./types";
 
 export class EmojiSearchService {

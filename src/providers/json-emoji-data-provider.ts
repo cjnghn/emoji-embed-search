@@ -15,7 +15,10 @@ export class JsonEmojiDataProvider implements EmojiDataProvider {
     this.embeddings = JSON.parse(data);
   }
 
-  async findSimilarEmojis(queryEmbedding: number[]): Promise<string[]> {
+  async findSimilarEmojis(
+    queryEmbedding: number[],
+    topK = 10
+  ): Promise<string[]> {
     // Implement cosine similarity search here
     // This is a simplified version, you might want to use a more efficient algorithm
     const similarities = this.embeddings.map((emoji) => ({
@@ -24,7 +27,7 @@ export class JsonEmojiDataProvider implements EmojiDataProvider {
     }));
 
     similarities.sort((a, b) => b.similarity - a.similarity);
-    return similarities.slice(0, 5).map((s) => s.emoji);
+    return similarities.slice(0, topK).map((s) => s.emoji);
   }
 
   private cosineSimilarity(a: number[], b: number[]): number {
