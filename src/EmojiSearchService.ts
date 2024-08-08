@@ -1,10 +1,18 @@
+import { EmbeddingProviderFactory } from "./providers/EmbdeeingProviderFactory";
+import { EmojiDataProviderFactory } from "./providers/EmojiDataProviderFactory";
 import { EmbeddingProvider, EmojiDataProvider } from "./types";
 
 export class EmojiSearchService {
-  constructor(
-    private embeddingProvider: EmbeddingProvider,
-    private dataProvider: EmojiDataProvider
-  ) {}
+  private embeddingProvider: EmbeddingProvider;
+  private dataProvider: EmojiDataProvider;
+
+  constructor(config: {
+    embeddingProvider: ReturnType<typeof EmbeddingProviderFactory.create>;
+    dataProvider: ReturnType<typeof EmojiDataProviderFactory.create>;
+  }) {
+    this.embeddingProvider = config.embeddingProvider;
+    this.dataProvider = config.dataProvider;
+  }
 
   async initialize(): Promise<void> {
     await this.dataProvider.loadData();

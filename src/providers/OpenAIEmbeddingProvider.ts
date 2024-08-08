@@ -1,14 +1,20 @@
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { EmbeddingProvider } from "../types";
+import { OpenAI } from "openai";
+import { EmbeddingProvider, EmbeddingProviderConfig } from "../types";
 
 export class OpenAIEmbeddingProvider implements EmbeddingProvider {
-  private embeddings: OpenAIEmbeddings;
+  private openai: OpenAI;
 
-  constructor(apiKey: string, model: string = "text-embedding-3-small") {
-    this.embeddings = new OpenAIEmbeddings({ apiKey, model });
+  constructor(private config: EmbeddingProviderConfig) {
+    this.openai = new OpenAI({
+      apiKey: config.apiKey,
+    });
   }
 
   async embedQuery(text: string): Promise<number[]> {
-    return this.embeddings.embedQuery(text);
+    const response = await this.openai.embeddings.create({
+      model: this.config.model,
+      input: text,
+    });
+    return response.data[0].embedding;
   }
 }

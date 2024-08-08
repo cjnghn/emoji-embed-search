@@ -18,9 +18,8 @@
   "author": "cjnghn",
   "license": "MIT",
   "dependencies": {
-    "@langchain/openai": "^0.2.6",
     "emojilib": "^3.0.12",
-    "langchain": "^0.2.13",
+    "openai": "^4.55.1",
     "unicode-emoji-json": "^0.6.0"
   },
   "devDependencies": {

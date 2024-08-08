@@ -1,30 +1,36 @@
 import fs from "fs/promises";
-import { EmojiDataProvider, EmojiEmbedding } from "../types";
-import { cosineSimilarity } from "../utils";
+import {
+  EmojiDataProvider,
+  EmojiDataProviderConfig,
+  EmojiEmbedding,
+} from "../types";
 
 export class JsonEmojiDataProvider implements EmojiDataProvider {
-  private data: EmojiEmbedding[] = [];
-  private readonly filePath: string;
+  private embeddings: EmojiEmbedding[] = [];
 
-  constructor(filePath: string) {
-    this.filePath = filePath;
-  }
+  constructor(private config: EmojiDataProviderConfig) {}
 
   async loadData(): Promise<void> {
-    const fileContent = await fs.readFile(this.filePath, "utf-8");
-    this.data = JSON.parse(fileContent);
+    const data = await fs.readFile(this.config.path, "utf-8");
+    this.embeddings = JSON.parse(data);
   }
 
-  async findSimilarEmojis(
-    queryEmbedding: number[],
-    topK = 5
-  ): Promise<string[]> {
-    // Cosine Similarity + top K
-    const similarities = this.data.map((emoji) => ({
+  async findSimilarEmojis(queryEmbedding: number[]): Promise<string[]> {
+    // Implement cosine similarity search here
+    // This is a simplified version, you might want to use a more efficient algorithm
+    const similarities = this.embeddings.map((emoji) => ({
       emoji: emoji.emoji,
-      similarity: cosineSimilarity(queryEmbedding, emoji.embedding),
+      similarity: this.cosineSimilarity(queryEmbedding, emoji.embedding),
     }));
+
     similarities.sort((a, b) => b.similarity - a.similarity);
-    return similarities.slice(0, topK).map((similarity) => similarity.emoji);
+    return similarities.slice(0, 5).map((s) => s.emoji);
+  }
+
+  private cosineSimilarity(a: number[], b: number[]): number {
+    const dotProduct = a.reduce((sum, _, i) => sum + a[i] * b[i], 0);
+    const magnitudeA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+    const magnitudeB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
+    return dotProduct / (magnitudeA * magnitudeB);
   }
 }

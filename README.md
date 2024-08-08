@@ -11,30 +11,6 @@
 
 ## Example
 
-CURRENT:
-
-```ts
-import {
-  EmojiSearchService,
-  OpenAIEmbeddingProvider,
-  JsonEmojiDataProvider,
-} from "../src/";
-
-async function searchEmojis() {
-  const emojiSearchService = new EmojiSearchService(
-    new OpenAIEmbeddingProvider(process.env.OPENAI_API_KEY as string),
-    new JsonEmojiDataProvider("data/embeddings.json")
-  );
-
-  await emojiSearchService.initialize();
-
-  const results = await emojiSearchService.search("ramen");
-  console.log(results); // [ '🍜', '🍚', '🍲', '🥟', '🍝' ]
-}
-
-searchEmojis().catch(console.error);
-```
-
 NEXT:
 
 ```ts
@@ -42,18 +18,19 @@ NEXT:
 const emojiSearchService = new EmojiSearchService({
   embeddingProvider: EmbeddingProviderFactory.create({
     type: "openai",
-    apiKey: "OPENAI_API_KEY",
+    apiKey: process.env.OPENAI_API_KEY as string,
     model: "text-embedding-3-small",
   }),
   dataProvider: EmojiDataProviderFactory.create({
     type: "json",
-    path: "../data/openai/text-embedding-3-small/embeddings.json",
+    path: "./data/embeddings.json",
   }),
 });
 
 // Initialize the service
+// Note: Load or create a new embedding if not exists xD
 await emojiSearchService.initialize();
 
 // Search for emojis
-const results = await emojiSearchService.search("행복한 얼굴");
+const results = await emojiSearchService.search("instant foods"); // [ '🥫', '🍨', '🍲', '🧑‍🍳', '🥘' ]
 ```

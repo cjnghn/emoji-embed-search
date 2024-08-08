@@ -16,3 +16,14 @@ export interface EmojiDataProvider {
   loadData(): Promise<void>;
   findSimilarEmojis(queryEmbedding: number[]): Promise<string[]>;
 }
+
+export interface EmbeddingProviderConfig {
+  type: string;
+  apiKey: string;
+  model: string;
+}
+
+export interface EmojiDataProviderConfig {
+  type: string;
+  path: string;
+}
